@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.1.1">
+  <zoom_level>9</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>45</x>
+      <y>63</y>
+      <w>252</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>Main
+--
+
+--
+-&gt;start game here
+-&gt;game exit manage using thread?</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>45</x>
+      <y>387</y>
+      <w>387</w>
+      <h>180</h>
+    </coordinates>
+    <panel_attributes>PlayerImpl
+--
+subNameNumber: int
+pDeck: int[]
+hDeck: HashMap&lt;Integer,Integer&gt;
+privilege: int
+win: int
+lose: int
+saveJokerCount: final Integer
+--
+PlayerImpl()
+PlayerImpl(int length, int[] contents, int index)
+PlayerImpl(int start, int length, int[] contents, int startIndex, int index)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>459</x>
+      <y>63</y>
+      <w>126</w>
+      <h>126</h>
+    </coordinates>
+    <panel_attributes>Deck
+--
+
+--
+showAllDeck(): void
+setAllDeck(): void
+getAllDeck(): int[]
+getDeckLength(): int
+getDeckLimit(): int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>459</x>
+      <y>378</y>
+      <w>261</w>
+      <h>81</h>
+    </coordinates>
+    <panel_attributes>PlayerManageImpl
+--
+players: HashMap&lt;Integer, PlayerImpl&gt;
+--
+PlayerManageImpl()
+PlayerManageImpl(final PlayerImpl[] players)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>747</x>
+      <y>225</y>
+      <w>288</w>
+      <h>234</h>
+    </coordinates>
+    <panel_attributes>GameImpl
+--
+playersArr: PlayerImpl[]
+pm: PlayerManageImpl
+playersHm: HashMap&lt;Integer, PlayerImpl&gt;
+finishPlayersHm: HashMap&lt;Integer, PlayerImpl&gt;
+gameDeck: DeckImpl
+nowCardNumber: int
+nowCardCount: int
+nowTurn: int
+lastTurn: int
+ranking: int
+lastTurnSubNameNumber: int
+playerCount: int
+ifFirstTurn: boolean
+--
+Game()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>747</x>
+      <y>63</y>
+      <w>180</w>
+      <h>162</h>
+    </coordinates>
+    <panel_attributes>Game
+--
+
+--
+void play(): void
+showNowTurn(): void
+askFirstTurn(): void
+askSecondTurn(): void
+useJoker(): void
+askWithJokerCount(): void
+notEnoughJokerMsg(): void
+notCorrectInputMsg(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>459</x>
+      <y>189</y>
+      <w>153</w>
+      <h>108</h>
+    </coordinates>
+    <panel_attributes>DeckImpl
+--
+allDeck: static int[]
+deckLength: int = 80
+deckLimit: final int = 13;
+--
+DeckImpl()
+DeckImpl(int deckLimit)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>45</x>
+      <y>162</y>
+      <w>387</w>
+      <h>225</h>
+    </coordinates>
+    <panel_attributes>Player
+--
+
+--
+slectCard(): int[]
+submitCard(int[] submitCard): void
+submitCardWithJoker(int withJokerCount): void
+showhDeck(): void
+isEmpty(): boolean
+isContainCard(int cardNumber): boolean
+hasJoker(int withJokerCount): boolean
+setPrivilege(int privilege): void
+getPrivilege(): int
+getSubNameNumber(): int
+setWin(boolean win): void
+setLose(boolean lose): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>459</x>
+      <y>315</y>
+      <w>261</w>
+      <h>63</h>
+    </coordinates>
+    <panel_attributes>PlayerManage
+--
+
+--
+getPlayers(): HashMap&lt;Integer, PlayerImpl&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.1.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>820</x>
+      <y>420</y>
+      <w>280</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>Main
+--
+
+--
+-&gt;start game here
+-&gt;game exit manage using thread?</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>100</x>
+      <y>80</y>
+      <w>470</w>
+      <h>300</h>
+    </coordinates>
+    <panel_attributes>Player
+--
+pDeck: int[]
+hDeck: HashMap&lt;Integer, Integer&gt;
+privilege: int
+win: int
+lose: int
+--
+Player(int length, int[] contents, int index)
+Player(int start, int length, int[] contents, int startIndex, int index)
+submitCard(): int[]
+submitCard(int cardNumber,int cardCount): void
+showhDeck(): void
+isEmpty(): boolean
+setPrivilege(int privilege): void
+getPrivilege(): int
+setWin(boolean win): void
+setLose(boolean lose): void
+gethDeck(): int[]
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>760</x>
+      <y>80</y>
+      <w>340</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>Deck
+--
+allDeck: static int[] -&gt; not static
+deckLength: static final int
+--
+Deck()
+showAllDeck(): static void -&gt; not static
+setAllDeck(): static void -&gt; not static
+getAllDeck(): static int[] -&gt; not static
+getDeckLength(): static int</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>820</x>
+      <y>260</y>
+      <w>280</w>
+      <h>140</h>
+    </coordinates>
+    <panel_attributes>PlayerManage
+--
+players : HashMap&lt;Integer, Player&gt;
+--
+PlayerManage(final Player[] players)
+getPlayers(): HashMap&lt;Integer, Player&gt;
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>110</x>
+      <y>410</y>
+      <w>560</w>
+      <h>290</h>
+    </coordinates>
+    <panel_attributes>Game
+--
+playersArr: Player[]
+players: HashMap&lt;Integer, Player&gt;
+finishPlayers: HashMap&lt;Integer, Player&gt;
+gameDeck: Deck
+nowPlayersLength: int
+nowCardNumber: int
+nowTurn: int
+lastTurn: int
+ranking: int
+finishCount: int
+ifFirstTurn: boolean
+--
+Game()
+play(): void
+askFirstTurn(): void
+askSecondTurn(): void
+useJoker(): void</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
