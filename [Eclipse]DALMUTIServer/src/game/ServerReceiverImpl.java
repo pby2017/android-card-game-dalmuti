@@ -136,12 +136,12 @@ class ServerReceiverImpl extends Thread {
 				runInit();
 			} // CMD_Client_ExitMember3
 			
-			if(CMD.contains("CMD_Client_pushSubmitBtnJoker4")) {
+			if(CMD.contains("CMD_Client_pushSubmitBtn4")) {
 				gri.getGi().processCMD(CMD, gpi);
-			} // CMD_Client_pushSubmitBtnJoker4
+			} // CMD_Client_pushSubmitBtn4
 			
 			if(CMD.equals("CMD_Client_pushPassBtn4")) {
-				gi.processCMD("CMD_pushPassBtn3", gpi);
+				gri.getGi().processCMD("CMD_pushPassBtn3", gpi);
 			} // CMD_Client_pushPassBtn4
 		}catch(Exception ex) {
 			ex.printStackTrace();

@@ -238,13 +238,15 @@ public class MyService extends Service {
             if(intent.getStringExtra("fromClass").equals("GameActivity")) {
                 Log.e("MyService", "fromClass - GameActivity");
 
-                if(intent.getStringExtra("cmd").equals("CMD_pushSubmitBtnJoker40")){
-                    String submitMsg = "CMD_Client_pushSubmitBtnJoker4"+
-                            ":jokerCount"+intent.getStringExtra("jokerCount")+
+                if(intent.getStringExtra("cmd").equals("CMD_pushSubmitBtn40")){
+                    String submitMsg = "CMD_Client_pushSubmitBtn4"+
                             ":cardNumber"+intent.getStringExtra("cardNumber")+
                             ":cardCount"+intent.getStringExtra("cardCount");
+                    if(intent.hasExtra("jokerCount")){
+                        submitMsg += ":jokerCount"+intent.getStringExtra("jokerCount");
+                    }
                     processCMD(submitMsg);
-                } // cmd.equals("CMD_pushSubmitBtnJoker40")
+                } // cmd.equals("CMD_pushSubmitBtn40")
 
                 if(intent.getStringExtra("cmd").equals("CMD_pushPassBtn40")){
                     Log.e("MyService", "cmd - CMD_pushPassBtn40");
@@ -546,7 +548,7 @@ public class MyService extends Service {
             sendCMD = "CMD_Client_pushPassBtn4";
         }
 
-        if(CMD.contains("CMD_Client_pushSubmitBtnJoker4")){
+        if(CMD.contains("CMD_Client_pushSubmitBtn4")){
             Log.e("MyService_processCMD",CMD);
 
             sendCMD = CMD;

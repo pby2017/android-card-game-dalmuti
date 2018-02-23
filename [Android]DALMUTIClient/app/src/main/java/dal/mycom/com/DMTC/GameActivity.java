@@ -103,7 +103,7 @@ public class GameActivity extends AppCompatActivity {
                     return;
                 }
                 if(nowCardCount !=0 || nowCardNumber != 0){
-                    if(cardNumber >= nowCardNumber || cardCount != nowCardNumber){
+                    if(cardNumber >= nowCardNumber || cardCount != nowCardCount){
                         Toast.makeText(getApplicationContext(),"you can not submit this card!!!",Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -114,7 +114,7 @@ public class GameActivity extends AppCompatActivity {
                         return;
                     }
                     jokerCount = Integer.parseInt(et_jokerCount.getText().toString());
-                    if(jokerCount < 0 || jokerCount > 2){
+                    if(jokerCount <= 0 || jokerCount > 2){
                         Toast.makeText(getApplicationContext(),"Invalid joker count.",Toast.LENGTH_SHORT).show();
                         return;
                     }
@@ -131,7 +131,7 @@ public class GameActivity extends AppCompatActivity {
                     toMyService = new Intent(getApplicationContext(), MyService.class);
 
                     toMyService.putExtra("fromClass","GameActivity");
-                    toMyService.putExtra("cmd","CMD_pushSubmitBtnJoker40");
+                    toMyService.putExtra("cmd","CMD_pushSubmitBtn40");
                     toMyService.putExtra("jokerCount",Integer.toString(jokerCount));
                     toMyService.putExtra("cardNumber",Integer.toString(cardNumber));
                     toMyService.putExtra("cardCount",Integer.toString(cardCount));
@@ -139,7 +139,22 @@ public class GameActivity extends AppCompatActivity {
                     startService(toMyService);
                 }else{
                     // 조커를 사용하지 않았을 때, intent 발생.
+
+                    toMyService = new Intent(getApplicationContext(), MyService.class);
+
+                    toMyService.putExtra("fromClass","GameActivity");
+                    toMyService.putExtra("cmd","CMD_pushSubmitBtn40");
+                    toMyService.putExtra("cardNumber",Integer.toString(cardNumber));
+                    toMyService.putExtra("cardCount",Integer.toString(cardCount));
+
+                    startService(toMyService);
                 }
+                if(cb_joker.isChecked()){
+                    et_jokerCount.setText("");
+                    cb_joker.setChecked(false);
+                }
+                et_cardNum.setText("");
+                et_cardCount.setText("");
             }
         });
 
@@ -197,7 +212,6 @@ public class GameActivity extends AppCompatActivity {
 
                 tv2_nowPlayer.setText(nowPlayer);
                 tv2_nowCard.setText(Integer.toString(nowCardNumber)+"("+Integer.toString(nowCardCount)+") - "+lastPlayer);
-//                tv2_myCard.setText(showhDeck);
             } // cmd.equals("CMD_Return_loadGameActivity_pushPassBtn04")
         } // fromClass.equals("MyService")
     }
@@ -213,11 +227,6 @@ public class GameActivity extends AppCompatActivity {
         super.onNewIntent(intent);
         Log.e("GameActivity","onNewIntent");
 
-        if(intent.hasExtra("cmd")){
-            Log.e("GameActivity",intent.getStringExtra("cmd"));
-        }else{
-            Log.e("GameActivity","this has not cmd extra");
-        }
         processCMD(intent);
     }
 

@@ -127,15 +127,19 @@ public class GameImpl implements Game {
 				}
 			} // CMD_pushStartBtn2
 			
-			if(msg.contains("CMD_Client_pushSubmitBtnJoker4")) {
+			if(msg.contains("CMD_Client_pushSubmitBtn4")) {
 				lastTurn=nowTurn;
 				lastTurnSubNameNumber = playersHm.get(lastTurn).getSubNameNumber(); // 필요한가?
 				
-				jokerCount = Integer.parseInt(msg.substring(msg.indexOf("jokerCount")+10,
-						msg.indexOf(":cardNumber")));
+				if(msg.contains("jokerCount")) {
+					jokerCount = Integer.parseInt(msg.substring(msg.indexOf("jokerCount")+10));
+					receiveSelectCard[1] = Integer.parseInt(msg.substring(msg.indexOf("cardCount")+9,
+							msg.indexOf(":jokerCount")));
+				}else {
+					receiveSelectCard[1] = Integer.parseInt(msg.substring(msg.indexOf("cardCount")+9));
+				}
 				receiveSelectCard[0] = Integer.parseInt(msg.substring(msg.indexOf("cardNumber")+10,
 						msg.indexOf(":cardCount")));
-				receiveSelectCard[1] = Integer.parseInt(msg.substring(msg.indexOf("cardCount")+9));
 				nowCardNumber = receiveSelectCard[0];
 				
 				System.out.println("낸 카드(jokerCount, cardNumber, cardCount : "+jokerCount+","+receiveSelectCard[0]+","+receiveSelectCard[1]);
