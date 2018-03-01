@@ -26,6 +26,7 @@ public class MyService extends Service {
     Boolean canStart;
     String nowPlayer;
     String lastPlayer;
+    String finishPlayer;
     int nowCardNumber;
     int nowCardCount;
     String showhDeck;
@@ -38,6 +39,7 @@ public class MyService extends Service {
     ArrayList<String> chatList2;
     ArrayList<String> gamerList;
     ArrayList<String> chatList3;
+    ArrayList<String> finishList;
 
     Intent toMyClass;
 
@@ -63,6 +65,7 @@ public class MyService extends Service {
         chatList2 = new ArrayList<>();
         gamerList = new ArrayList<>();
         chatList3 = new ArrayList<>();
+        finishList = new ArrayList<>();
 
         toMyClass = null;
 
@@ -356,6 +359,7 @@ public class MyService extends Service {
             toMyClass.putExtra("nowCardCount",nowCardCount);
             toMyClass.putExtra("showhDeck",showhDeck);
             toMyClass.putExtra("hDeck",hDeck);
+            toMyClass.putExtra("finishList",finishList);
 
             startActivity(toMyClass);
         } // CMD_startGameActivity
@@ -848,6 +852,10 @@ public class MyService extends Service {
                     nowCardNumber = Integer.parseInt(din.readUTF());
                     nowCardCount = Integer.parseInt(din.readUTF());
                     showhDeck = din.readUTF();
+                    finishPlayer = din.readUTF();
+                    if(finishPlayer.length() > 0){
+                        finishList.add(finishPlayer);
+                    }
                     oin = new ObjectInputStream(s.getInputStream());
                     hDeck = (HashMap<Integer, Integer>)oin.readObject();
 
@@ -862,7 +870,10 @@ public class MyService extends Service {
                     lastPlayer = din.readUTF();
                     nowCardNumber = Integer.parseInt(din.readUTF());
                     nowCardCount = Integer.parseInt(din.readUTF());
-
+                    finishPlayer = din.readUTF();
+                    if(finishPlayer.length() > 0){
+                        finishList.add(finishPlayer);
+                    }
                     processCMD("CMD_startGameActivity");
                 } // CMD_Server_pushSubmitBtn4
 
@@ -877,6 +888,30 @@ public class MyService extends Service {
 
                     processCMD("CMD_loadGameActivity_pushPassBtn");
                 } // CMD_Server_pushPassBtn4
+
+                if(CMD.equals("CMD_Server_deckClear4")){
+                    Log.e("MyService_ReceiveCMD","CMD_Server_deckClear4");
+                    showhDeck = "";
+                    hDeck.clear();
+                } // CMD_Server_deckClear4
+
+                if(CMD.equals("CMD_Server_gameClear4")){
+                    Log.e("MyService_ReceiveCMD","CMD_Server_gameClear4");
+
+                    roomName = null;
+                    master = false;
+                    canStart = false;
+                    nowPlayer = null;
+                    lastPlayer = null;
+                    finishPlayer = null;
+                    nowCardNumber = 0;
+                    nowCardCount = 0;
+                    showhDeck = null;
+                    hDeck.clear();
+                    finishList=new ArrayList<>();
+
+                    processCMD("CMD_startRobbyActivity");
+                } // CMD_Server_gameClear4
             }catch(Exception ex){
                 ex.printStackTrace();
                 Log.e("error!!",CMD);

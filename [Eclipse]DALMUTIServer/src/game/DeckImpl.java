@@ -1,6 +1,6 @@
 package game;
 
-public class DeckImpl implements Deck {
+public class DeckImpl {
 
 	static private int[] allDeck;
 	private int deckLength = 80;
@@ -38,7 +38,6 @@ public class DeckImpl implements Deck {
 		allDeck[(deckLength-2-1)+2]=13;
 	}
 
-	@Override
 	public void showAllDeck()
 	{
 		System.out.print("[");
@@ -53,7 +52,6 @@ public class DeckImpl implements Deck {
 		System.out.println("]");
 	}
 
-	@Override
 	public void setAllDeck()
 	{
 		int tmpPos, tmpIndex, tmpCase;
@@ -76,19 +74,16 @@ public class DeckImpl implements Deck {
 		}
 	}
 
-	@Override
 	public int[] getAllDeck()
 	{
 		return DeckImpl.allDeck;
 	}
 
-	@Override
 	public int getDeckLength()
 	{
 		return this.deckLength;
 	}
 
-	@Override
 	public int getDeckLimit()
 	{
 		return this.deckLimit;

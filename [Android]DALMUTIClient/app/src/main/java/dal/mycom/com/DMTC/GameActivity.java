@@ -5,14 +5,18 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class GameActivity extends AppCompatActivity {
@@ -22,12 +26,16 @@ public class GameActivity extends AppCompatActivity {
     LinearLayout llh_jokerCount;
     EditText et_jokerCount, et_cardNum, et_cardCount;
     Button bt_submit, bt_pass;
+    ScrollView sv_finish;
+    ListView lv_finish;
 
     int cardNumber, cardCount, jokerCount;
     String IPHName, nowPlayer, lastPlayer;
     int nowCardNumber, nowCardCount;
     String showhDeck;
     HashMap<Integer, Integer> hDeck;
+    ArrayList<String> finishList;
+    ArrayAdapter finishAdapter;
 
     Intent toMyService;
     Intent toMyClass;
@@ -53,6 +61,8 @@ public class GameActivity extends AppCompatActivity {
         et_cardCount = (EditText)findViewById(R.id.et_cardCount);
         bt_submit = (Button)findViewById(R.id.bt_submit);
         bt_pass = (Button)findViewById(R.id.bt_pass);
+        sv_finish = (ScrollView)findViewById(R.id.sv_finish);
+        lv_finish = (ListView)findViewById(R.id.lv_finish);
 
         llh_jokerCount.setVisibility(View.INVISIBLE);
 
@@ -102,12 +112,6 @@ public class GameActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"you have not this card enough!!!",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(nowCardCount !=0 || nowCardNumber != 0){
-                    if(cardNumber >= nowCardNumber || cardCount != nowCardCount){
-                        Toast.makeText(getApplicationContext(),"you can not submit this card!!!",Toast.LENGTH_SHORT).show();
-                        return;
-                    }
-                }
                 if(cb_joker.isChecked()){
                     if(et_jokerCount.getText() == null || et_jokerCount.getText().toString().equals("")){
                         Toast.makeText(getApplicationContext(),"Empty joker count.",Toast.LENGTH_SHORT).show();
@@ -126,6 +130,12 @@ public class GameActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),"you have not Joker enough!!!",Toast.LENGTH_SHORT).show();
                         return;
                     }
+                    if(nowCardCount !=0 || nowCardNumber != 0){
+                        if(cardNumber >= nowCardNumber || (cardCount+jokerCount) != nowCardCount){
+                            Toast.makeText(getApplicationContext(),"you can not submit this card!!!",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
                     // 조커를 사용했을 때, intent 발생.
 
                     toMyService = new Intent(getApplicationContext(), MyService.class);
@@ -138,6 +148,12 @@ public class GameActivity extends AppCompatActivity {
 
                     startService(toMyService);
                 }else{
+                    if(nowCardCount !=0 || nowCardNumber != 0){
+                        if(cardNumber >= nowCardNumber || cardCount != nowCardCount){
+                            Toast.makeText(getApplicationContext(),"you can not submit this card!!!",Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
                     // 조커를 사용하지 않았을 때, intent 발생.
 
                     toMyService = new Intent(getApplicationContext(), MyService.class);
@@ -192,6 +208,7 @@ public class GameActivity extends AppCompatActivity {
                 nowCardCount = intent.getIntExtra("nowCardCount", 0);
                 showhDeck = intent.getStringExtra("showhDeck");
                 hDeck = (HashMap<Integer, Integer>)intent.getSerializableExtra("hDeck");
+                finishList = (ArrayList<String>)intent.getSerializableExtra("finishList");
                 if(nowCardNumber == 0 || nowCardCount == 0){
                     lastPlayer = "";
                 }
@@ -199,6 +216,10 @@ public class GameActivity extends AppCompatActivity {
                 tv2_nowPlayer.setText(nowPlayer);
                 tv2_nowCard.setText(Integer.toString(nowCardNumber)+"("+Integer.toString(nowCardCount)+") - "+lastPlayer);
                 tv2_myCard.setText(showhDeck);
+                if(finishList.size() != 0){
+                    finishAdapter = new ArrayAdapter(getApplicationContext(), R.layout.listview_custom, finishList);
+                    lv_finish.setAdapter(finishAdapter);
+                }
             } // cmd.equals("CMD_startGameActivity04")
 
             if(intent.getStringExtra("cmd").equals("CMD_Return_loadGameActivity_pushPassBtn04")){

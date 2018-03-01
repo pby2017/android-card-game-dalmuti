@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class GamePlayerImpl implements GamePlayer {
+public class GamePlayerImpl {
 
 	private String nickName;
 	private int ip_port_hash;
@@ -158,7 +158,6 @@ public class GamePlayerImpl implements GamePlayer {
 		return this.hDeck;
 	}
 
-	@Override
 	public void submitCard(int[] submitCard) {
 		// TODO Auto-generated method stub
 		
@@ -169,7 +168,6 @@ public class GamePlayerImpl implements GamePlayer {
 		}
 	}
 
-	@Override
 	public void submitCardWithJoker(int jokerCount)
 	{
 		hDeck.put(saveJokerCount, Integer.valueOf(hDeck.get(saveJokerCount).intValue() - jokerCount));
@@ -179,7 +177,6 @@ public class GamePlayerImpl implements GamePlayer {
 		}
 	}
 
-	@Override
 	public String showhDeck()
 	{
 		String showhDeck = "";
@@ -201,7 +198,6 @@ public class GamePlayerImpl implements GamePlayer {
 		return showhDeck;
 	}
 
-	@Override
 	public boolean isEmpty()
 	{
 		if(hDeck.size() <= 0) return true;
@@ -209,7 +205,6 @@ public class GamePlayerImpl implements GamePlayer {
 		return false;
 	}
 
-	@Override
 	public boolean isContainCard(int cardNumber)
 	{
 		if(hDeck.containsKey(Integer.valueOf(cardNumber)))
@@ -222,7 +217,6 @@ public class GamePlayerImpl implements GamePlayer {
 		}
 	}
 
-	@Override
 	public boolean hasJoker(int withJokerCount)
 	{
 		if(hDeck.get(Integer.valueOf(13)).intValue() >= withJokerCount)
@@ -235,7 +229,6 @@ public class GamePlayerImpl implements GamePlayer {
 		}
 	}
 	
-	@Override
 	public boolean hasCard(int cardNumber, int cardCount)
 	{
 		if(!hDeck.containsKey(Integer.valueOf(cardNumber)))
@@ -252,43 +245,36 @@ public class GamePlayerImpl implements GamePlayer {
 		}
 	}
 
-	@Override
 	public void setPrivilege(int privilege)
 	{
 		this.privilege = privilege;
 	}
 
-	@Override
 	public int getPrivilege()
 	{
 		return this.privilege;
 	}
 
-	@Override
 	public int getSubNameNumber()
 	{
 		return this.subNameNumber;
 	}
 
-	@Override
 	public void setWin()
 	{
 		this.win++;
 	}
 	
-	@Override
 	public int getWin()
 	{
 		return this.win;
 	}
 	
-	@Override
 	public void setLose()
 	{
 		this.lose++;
 	}
 	
-	@Override
 	public int getLose()
 	{
 		return this.lose;

@@ -152,6 +152,13 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/bt_pass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="패스하기" />
+
+        <Button
             android:id="@+id/bt_submit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -163,15 +170,31 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/bt_pass"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="패스하기" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="끝난 순서" />
+
+            <ScrollView
+                android:id="@+id/sv_finish"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true">
+
+                <ListView
+                    android:id="@+id/lv_finish"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </ScrollView>
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

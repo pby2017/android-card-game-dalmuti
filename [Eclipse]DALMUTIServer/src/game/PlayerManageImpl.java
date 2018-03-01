@@ -2,7 +2,7 @@ package game;
 
 import java.util.HashMap;
 
-public class PlayerManageImpl implements PlayerManage {
+public class PlayerManageImpl {
 
 	HashMap<Integer, GamePlayerImpl> players;
 	
@@ -21,7 +21,6 @@ public class PlayerManageImpl implements PlayerManage {
 		}
 	}
 
-	@Override
 	public HashMap<Integer, GamePlayerImpl> getPlayers()
 	{
 		return this.players;
