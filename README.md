@@ -17,6 +17,7 @@
 # HOW TO INSTALL SERVER EXE
 1. go to tmpRepo folder
 2. download DMTS_~~ (latest version) at desktop
+3. also need download and install JRE (https://www.oracle.com/technetwork/java/javase/downloads/jre8-downloads-2133155.html)
 # HOW TO USE APP if use not Internet modem
 1. check desktop ip
 2. execute DMTS_~~ exe file. this app use port 7777
